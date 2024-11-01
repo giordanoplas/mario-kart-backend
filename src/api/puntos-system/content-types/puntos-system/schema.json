@@ -35,12 +35,6 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::puntos-system-category.puntos-system-category"
-    },
-    "miembro": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::miembro.miembro",
-      "inversedBy": "puntos_systems"
     }
   }
 }

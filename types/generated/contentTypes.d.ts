@@ -398,10 +398,6 @@ export interface ApiMiembroMiembro extends Struct.CollectionTypeSchema {
     nombre: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     puntos: Schema.Attribute.Integer;
-    puntos_systems: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::puntos-system.puntos-system'
-    >;
     slug: Schema.Attribute.UID<'nombre'>;
     ubicacion: Schema.Attribute.Enumeration<
       ['Santiago', 'La Vega', 'Moca', 'Puerto Plata', 'Jarabacoa']
@@ -465,7 +461,6 @@ export interface ApiPuntosSystemPuntosSystem
     > &
       Schema.Attribute.Private;
     mainImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    miembro: Schema.Attribute.Relation<'manyToOne', 'api::miembro.miembro'>;
     nombre: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     puntos_system_category: Schema.Attribute.Relation<

@@ -49,12 +49,6 @@
         "videos",
         "audios"
       ]
-    },
-    "puntos_systems": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::puntos-system.puntos-system",
-      "mappedBy": "miembro"
     }
   }
 }
