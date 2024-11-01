@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "puntos_systems",
+  "info": {
+    "singularName": "puntos-system",
+    "pluralName": "puntos-systems",
+    "displayName": "PuntosSystem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "nombre"
+    },
+    "valor": {
+      "type": "integer"
+    },
+    "mainImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "puntos_system_category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::puntos-system-category.puntos-system-category"
+    },
+    "miembro": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::miembro.miembro",
+      "inversedBy": "puntos_systems"
+    }
+  }
+}

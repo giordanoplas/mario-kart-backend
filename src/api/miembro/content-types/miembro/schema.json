@@ -4,17 +4,18 @@
   "info": {
     "singularName": "miembro",
     "pluralName": "miembros",
-    "displayName": "Miembro"
+    "displayName": "Miembro",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "Nombre": {
+    "nombre": {
       "type": "string"
     },
-    "Ubicacion": {
+    "ubicacion": {
       "type": "enumeration",
       "enum": [
         "Santiago",
@@ -24,15 +25,36 @@
         "Jarabacoa"
       ]
     },
-    "Genero": {
+    "genero": {
       "type": "enumeration",
       "enum": [
         "Hermano",
         "Hermana"
       ]
     },
-    "Puntos": {
+    "puntos": {
       "type": "integer"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "nombre"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "puntos_systems": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::puntos-system.puntos-system",
+      "mappedBy": "miembro"
     }
   }
 }

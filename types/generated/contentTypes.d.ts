@@ -372,6 +372,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiMiembroMiembro extends Struct.CollectionTypeSchema {
   collectionName: 'miembros';
   info: {
+    description: '';
     displayName: 'Miembro';
     pluralName: 'miembros';
     singularName: 'miembro';
@@ -383,22 +384,99 @@ export interface ApiMiembroMiembro extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Genero: Schema.Attribute.Enumeration<['Hermano', 'Hermana']>;
+    genero: Schema.Attribute.Enumeration<['Hermano', 'Hermana']>;
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::miembro.miembro'
     > &
       Schema.Attribute.Private;
-    Nombre: Schema.Attribute.String;
+    nombre: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    Puntos: Schema.Attribute.Integer;
-    Ubicacion: Schema.Attribute.Enumeration<
+    puntos: Schema.Attribute.Integer;
+    puntos_systems: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::puntos-system.puntos-system'
+    >;
+    slug: Schema.Attribute.UID<'nombre'>;
+    ubicacion: Schema.Attribute.Enumeration<
       ['Santiago', 'La Vega', 'Moca', 'Puerto Plata', 'Jarabacoa']
     >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPuntosSystemCategoryPuntosSystemCategory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'puntos_system_categories';
+  info: {
+    displayName: 'PuntosSystemCategory';
+    pluralName: 'puntos-system-categories';
+    singularName: 'puntos-system-category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    categoryName: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::puntos-system-category.puntos-system-category'
+    > &
+      Schema.Attribute.Private;
+    mainImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'categoryName'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPuntosSystemPuntosSystem
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'puntos_systems';
+  info: {
+    displayName: 'PuntosSystem';
+    pluralName: 'puntos-systems';
+    singularName: 'puntos-system';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::puntos-system.puntos-system'
+    > &
+      Schema.Attribute.Private;
+    mainImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    miembro: Schema.Attribute.Relation<'manyToOne', 'api::miembro.miembro'>;
+    nombre: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    puntos_system_category: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::puntos-system-category.puntos-system-category'
+    >;
+    slug: Schema.Attribute.UID<'nombre'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    valor: Schema.Attribute.Integer;
   };
 }
 
@@ -908,6 +986,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::miembro.miembro': ApiMiembroMiembro;
+      'api::puntos-system-category.puntos-system-category': ApiPuntosSystemCategoryPuntosSystemCategory;
+      'api::puntos-system.puntos-system': ApiPuntosSystemPuntosSystem;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "puntos_system_categories",
+  "info": {
+    "singularName": "puntos-system-category",
+    "pluralName": "puntos-system-categories",
+    "displayName": "PuntosSystemCategory"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "categoryName": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "categoryName"
+    },
+    "mainImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
